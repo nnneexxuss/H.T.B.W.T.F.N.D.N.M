@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://1xu5gyels7f7"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_rpq68"]
+[ext_resource type="Texture2D" uid="uid://cmrm4nb6vkgaf" path="res://npc115.png" id="2_g5jfn"]
+[ext_resource type="Texture2D" uid="uid://das8probh1wtp" path="res://boneco coisado.png" id="3_4civ0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k57m"]
+size = Vector2(108, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1ty4"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28kpx"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elcrd"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12v16"]
+atlas = ExtResource("2_g5jfn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aixvd"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blqwq"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_velvo"]
+atlas = ExtResource("3_4civ0")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkh4m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1ty4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28kpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elcrd")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12v16")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aixvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blqwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_velvo")
+}],
+"loop": true,
+"name": &"running",
+"speed": 5.0
+}]
+
+[node name="player" type="CharacterBody2D"]
+position = Vector2(74, -2)
+script = ExtResource("1_rpq68")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-69, -19)
+shape = SubResource("RectangleShape2D_5k57m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-69, -59)
+scale = Vector2(8.99951, 8.34863)
+sprite_frames = SubResource("SpriteFrames_mkh4m")
+animation = &"climb"
+autoplay = "default"
+frame_progress = 0.5257
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(16, 37)
+zoom = Vector2(0.5, 0.5)
+limit_bottom = 4246
+
+[node name="LadderRayCast" type="RayCast2D" parent="."]
+position = Vector2(-73, -68)
+scale = Vector2(5, 5)
+target_position = Vector2(0, -10)
+collision_mask = 2
